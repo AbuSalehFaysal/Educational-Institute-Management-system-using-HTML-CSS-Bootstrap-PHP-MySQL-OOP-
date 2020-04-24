@@ -5,7 +5,7 @@
     <title>Scale | Web Application</title>
     <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link rel="stylesheet" href="css/app.v1.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/app.v1.css" type="text/css" />
     <!--[if lt IE 9]> <script src="js/ie/html5shiv.js"></script> <script src="js/ie/respond.min.js"></script> <script src="js/ie/excanvas.js"></script> <![endif]-->
 </head>
 
@@ -30,12 +30,12 @@
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
 
-                    <div class="text-center m-t m-b"><a href="#"><small>Forgot password?</small></a></div>
+                    <div class="text-center m-t m-b"><a href="reset_pass.php"><small>Forgot password?</small></a></div>
 
 
                     <div class="line line-dashed"></div>
                     <p class="text-muted text-center"><small>Do not have an account?</small></p> 
-                    <a href="signup.html" class="btn btn-lg btn-default btn-block">Create an account</a> 
+                    <a href="reg.php" class="btn btn-lg btn-default btn-block">Create an account</a> 
                 </form>
 
 
@@ -47,8 +47,8 @@
     <!-- / footer -->
     <!-- Bootstrap -->
     <!-- App -->
-    <script src="js/app.v1.js"></script>
-    <script src="js/app.plugin.js"></script>
+    <script src="assets/js/app.v1.js"></script>
+    <script src="assets/js/app.plugin.js"></script>
 </body>
 
 </html>
