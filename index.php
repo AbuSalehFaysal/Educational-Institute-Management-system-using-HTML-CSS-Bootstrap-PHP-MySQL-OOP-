@@ -1,3 +1,27 @@
+<?php 
+    session_start();
+    include_once dirname(__FILE__)."/autoload.php";
+
+    use apps\libs\admins\Admin;
+    // use apps\libs\staffs\Staff;
+    // use apps\libs\students\Student;
+
+    // new Admin;
+    // new Staff;
+    // new Student;
+
+    $admin = new Admin;
+
+    if ( isset($_SESSION['user_name']) ) {
+        # code...
+        header("location: dashboard.php");
+    }
+
+    
+
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en" class=" ">
 <head>
@@ -13,24 +37,56 @@
     <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
         <div class="container aside-xl"> <a class="navbar-brand block" href="index.html">Sign in from here</a>
             <section class="m-b-lg">
+
+                <?php 
+
+                    if ( isset($_POST['submit']) ) {
+                        # code...
+                        $euname = $_POST['euname'];
+                        $pass = $_POST['pass'];
+
+                        if ( empty($euname) || empty($pass) ) {
+                            # code...
+                            $mess = "<p class='alert alert-danger'>Please, fill the form properly!<button class='close' data-dismiss='alert'>&times;</button></p>";
+                        } else {
+                            # code...
+                             $mess = $admin -> userLogin($euname, $pass);
+                        }
+                        
+                    }
+
+
+
+
+                 ?>
+
+                 <div class="mess">
+                    <?php  
+
+                        if( isset($mess) ){
+                            echo $mess;
+                            }
+
+                    ?>
+                </div>
                
-                <form action="http://flatfull.com/themes/scale/index.html">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                     <div class="list-group">
                         <div class="list-group-item">
-                            <input type="email" placeholder="Email / Username" class="form-control no-border"> 
+                            <input name="euname" type="text" placeholder="Email / Username" class="form-control no-border"> 
                         </div>
                         <div class="list-group-item">
-                            <input type="password" placeholder="Password" class="form-control no-border"> 
+                            <input name="pass" type="password" placeholder="Password" class="form-control no-border"> 
                         </div>
                     </div>
 
-                    <div class="checkbox m-b">
+                    <!-- <div class="checkbox m-b">
                         <label>
                             <input type="checkbox"> Remember Me <a href="#">for next time login</a> </label>
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+                    </div> -->
+                    <button name="submit" type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
 
-                    <div class="text-center m-t m-b"><a href="reset_pass.php"><small>Forgot password?</small></a></div>
+                    <!-- <div class="text-center m-t m-b"><a href="reset_pass.php"><small>Forgot password?</small></a></div> -->
 
 
                     <div class="line line-dashed"></div>

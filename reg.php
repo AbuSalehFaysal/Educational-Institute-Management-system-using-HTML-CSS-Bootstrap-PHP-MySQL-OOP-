@@ -1,3 +1,27 @@
+<?php 
+
+    include_once dirname(__FILE__)."/autoload.php";
+
+    use apps\libs\admins\Admin;
+    // use apps\libs\staffs\Staff;
+    // use apps\libs\students\Student;
+
+    // new Admin;
+    // new Staff;
+    // new Student;
+
+    $admin = new Admin;
+
+     if ( isset($_SESSION['user_name']) ) {
+        # code...
+        header("location: dashboard.php");
+    }
+
+    
+
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en" class=" ">
 <!-- Mirrored from flatfull.com/themes/scale/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Jul 2019 15:15:07 GMT -->
@@ -25,10 +49,20 @@
 
                     if ( isset($_POST['submit']) ) {
                         # code...
+
                         $name = $_POST['name'];
+
+                        //username check
                         $uname = $_POST['uname'];
+                        $username_check = $admin -> checkUsername($uname);
+
+                        //email check
                         $email = $_POST['email'];
+                        $email_check = $admin -> checkEmail($email);
+
+                        //hash pass
                         $pass = $_POST['pass'];
+                        // $hash_pass = password_hash($pass, PASSWORD_DEFAULT);
                         
 
                         if (isset( $_POST['agree'] )) {
@@ -48,8 +82,22 @@
                         }elseif (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
                             # code...
                             $mess = "<p  class='alert alert-danger'>Invalid Email!<button class='close' data-dismiss='alert'>&times;</button></p>";
+                        }elseif ($username_check == false) {
+                            # code...
+                            $mess = "<p  class='alert alert-danger'>Username already exists!<button class='close' data-dismiss='alert'>&times;</button></p>";
+                        }elseif ($email_check == false) {
+                            # code...
+                            $mess = "<p  class='alert alert-danger'>Email already exists!<button class='close' data-dismiss='alert'>&times;</button></p>";
                         } else {
                             # code...
+                            $data = $admin -> adminRegistration($name, $uname, $email, $pass);
+                            if ($data == true) {
+                                # code...
+                                $mess = "<p  class='alert alert-success'>Congratulations!<button class='close' data-dismiss='alert'>&times;</button></p>";
+                            } else {
+                                # code...
+                            }
+                            
                         }
                         
                         
